@@ -2,7 +2,7 @@ import RefForm from "./RefForm";
 import StateForm from "./StateForm";
 
 function App() {
-  return <RefForm />;
+  return <StateForm />;
 }
 
 export default App;

@@ -4,9 +4,10 @@ import "./styles.css";
 export default function StateForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAfterFirstSubmit, setIsAfterFirstSubmit] = useState(false);
 
-  const [emailErrors, setEmailErrors] = useState([]);
-  const [passwordErrors, setPasswordErrors] = useState([]);
+  const emailErrors = isAfterFirstSubmit ? checkEmail(email) : [];
+  const passwordErrors = isAfterFirstSubmit ? checkPassword(password) : [];
 
   function checkEmail(email) {
     const errors = [];
@@ -40,12 +41,10 @@ export default function StateForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsAfterFirstSubmit(true);
 
     const emailValidationResults = checkEmail(email);
     const passwordValidationResults = checkPassword(password);
-
-    setEmailErrors(emailValidationResults);
-    setPasswordErrors(passwordValidationResults);
 
     if (
       emailValidationResults.length === 0 &&
